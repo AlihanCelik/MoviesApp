@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/main_color"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".IntroActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                android:text="@string/main_txt1">
+                android:text="@string/intro_txt1">
             </TextView>
             <TextView
                 android:layout_width="wrap_content"
@@ -65,7 +65,7 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/main_txt2">
+                android:text="@string/intro_txt2">
             </TextView>
             <TextView
                 android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/main_txt3">
+                android:text="@string/intro_txt3">
             </TextView>
             <TextView
                 android:layout_width="wrap_content"
@@ -87,9 +87,10 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginTop="5dp"
-                android:text="@string/main_txt4">
+                android:text="@string/intro_txt4">
             </TextView>
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/getStarted_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -100,12 +101,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="15dp"
                     android:layout_gravity="center"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:text="@string/main_btn"
-                    android:textSize="20sp">
+                    android:text="@string/intro_btn"
+                    android:textSize="15sp">
 
                 </TextView>
             </com.google.android.material.card.MaterialCardView>

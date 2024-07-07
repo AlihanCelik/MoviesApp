@@ -1,14 +1,16 @@
 <resources>
     <string name="app_name">MoviesApp</string>
-    <string name="main_txt1">Discover Your</string>
-    <string name="main_txt2">Favorite Show</string>
-    <string name="main_txt3">Watch Now or Watch Later</string>
-    <string name="main_txt4">you can browse movies and shows by genre ,search for specific title ,or check out recommendation for you</string>
-    <string name="main_btn">Get Started</string>
+    <string name="intro_txt1">Discover Your</string>
+    <string name="intro_txt2">Favorite Show</string>
+    <string name="intro_txt3">Watch Now or Watch Later</string>
+    <string name="intro_txt4">you can browse movies and shows by genre ,search for specific title ,or check out recommendation for you</string>
+    <string name="intro_btn">Get Started</string>
     
     <string name="login_txt1">Log in</string>
     <string name="login_txt2">User Name</string>
     <string name="login_txt3">Password</string>
-    <string name="login_txt4">Forget Your Password</string>
-    <string name="login_txt5"
+    <string name="login_txt4">Forget Your Password?</string>
+    <string name="login_btn">Login</string>
+    <string name="login_txt5">or</string>
+    <string name="login_txt6">Register Now</string>
 </resources>
