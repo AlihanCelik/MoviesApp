@@ -27,7 +27,6 @@ class SliderAdapter(private var context: Context,
 
     override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
         val picture = sliderAdapter[position]
-        Toast.makeText(context,picture.image,Toast.LENGTH_SHORT).show()
         Glide.with(context)
             .load(picture.image)
             .placeholder(R.drawable.wide)

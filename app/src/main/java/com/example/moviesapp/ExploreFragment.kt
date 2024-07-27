@@ -52,25 +52,26 @@ class ExploreFragment : Fragment() {
         binding.viewPager.clipChildren=false
         binding.viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
         binding.progressBar.visibility = View.VISIBLE
-        val transformer=CompositePageTransformer()
+        val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
-        transformer.addTransformer{page,position ->
-            val r=1-abs(position)
-            page.scaleY=0.85f+r+0.14f
-
+        transformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.85f + r * 0.15f
         }
         binding.viewPager.setPageTransformer(transformer)
         binding.viewPager.registerOnPageChangeCallback(object :ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
-                handler.postDelayed(runnable,2000)
+                handler.postDelayed(runnable,30000)
             }
         })
         binding.viewPager.post {
             if (pictureList.isNotEmpty()) {
                 binding.progressBar.visibility = View.GONE
+
             }
+            binding.viewPager.currentItem = pictureList.size / 2
         }
     }
 
@@ -82,7 +83,7 @@ class ExploreFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(runnable,2000)
+        handler.postDelayed(runnable,30000)
     }
 
 
