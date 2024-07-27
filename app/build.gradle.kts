@@ -51,4 +51,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.androidx.viewpager2)
     implementation (libs.gson)
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+
 }

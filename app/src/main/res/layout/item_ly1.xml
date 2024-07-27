@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        app:cardElevation="20dp"
+        app:cardCornerRadius="20dp"
+        android:layout_height="250dp">
+        <ImageView
+            android:id="@+id/item_ly1_pic"
+            android:layout_width="match_parent"
+            android:src="@drawable/wide"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="false"
+            android:layout_height="match_parent">
+
+        </ImageView>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
