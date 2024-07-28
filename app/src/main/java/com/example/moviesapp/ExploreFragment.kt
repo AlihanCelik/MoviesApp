@@ -105,11 +105,9 @@ class ExploreFragment : Fragment() {
         binding.recyclerView1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView1.adapter = bestMovieAdapter
         getMovies(1, bestMovieAdapter,binding.progressBar1)
-
         binding.recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView2.adapter = genresAdapter
         getGenres()
-
         binding.recyclerView3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView3.adapter = moviesAdapter
         getMovies(2, moviesAdapter,binding.progressBar3)

@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
                 app:cardCornerRadius="12dp"
+                app:strokeColor="@color/orange"
                 android:clickable="true"
                 android:backgroundTint="@color/orange"
                 app:cardElevation="10dp">

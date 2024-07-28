@@ -96,6 +96,7 @@
                 android:layout_margin="15dp"
                 app:cardCornerRadius="12dp"
                 android:clickable="true"
+                app:strokeColor="@color/orange"
                 android:backgroundTint="@color/orange"
                 app:cardElevation="10dp">
                 <TextView
