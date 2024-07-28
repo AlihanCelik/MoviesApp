@@ -3,6 +3,7 @@ package com.example.moviesapp
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -24,7 +25,7 @@ class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
     private lateinit var handler: Handler
-    private lateinit var BestMovieAdapter: ExploreMoviesAdapter
+    private lateinit var bestMovieAdapter: ExploreMoviesAdapter
 
     private var currentPage = 1
     private val totalPages = 25
@@ -46,16 +47,18 @@ class ExploreFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
 
         val pictureList = mutableListOf(
             PictureEntities("https://github.com/worldsat/project155/blob/main/wide3.jpg?raw=true"),
             PictureEntities("https://github.com/worldsat/project155/blob/main/wide1.jpg?raw=true"),
             PictureEntities("https://github.com/worldsat/project155/blob/main/wide.jpg?raw=true")
         )
-        val adapter = SliderAdapter(requireContext(), pictureList)
+
+        val sliderAdapter = SliderAdapter(requireContext(), pictureList)
         binding.viewPager.clipToPadding=false
         binding.viewPager.offscreenPageLimit=3
-        binding.viewPager.adapter = adapter
+        binding.viewPager.adapter = sliderAdapter
         binding.viewPager.clipChildren=false
         binding.viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
         binding.progressBar.visibility = View.VISIBLE
@@ -81,17 +84,26 @@ class ExploreFragment : Fragment() {
             binding.viewPager.currentItem = pictureList.size / 2
         }
 
-        BestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
-        binding.recyclerView1.adapter=BestMovieAdapter
-        getMovies(1,BestMovieAdapter)
+
+        binding.recyclerView1.adapter=bestMovieAdapter
+        getMovies(1,bestMovieAdapter)
+
 
 
     }
     private fun getMovies(page: Int, adapter: ExploreMoviesAdapter) {
         MovieUtils.getMovies(page, { movies ->
-            Toast.makeText(requireContext(),movies.size, Toast.LENGTH_SHORT).show()
-            adapter.addMovies(movies)
+            Log.d("ExploreFragment", "Movies received: ${movies.size}")
+            movies.forEach { movie ->
+                Log.d("ExploreFragment", "Movie: $movie")
+            }
+            Handler(Looper.getMainLooper()).post {
+                adapter.addMovies(movies)
+                Log.d("ExploreFragment", "Movies added to adapter")
+            }
         }, { error ->
+            Log.e("ExploreFragment", "Error: ${error.message}")
+            Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
         })
     }
 

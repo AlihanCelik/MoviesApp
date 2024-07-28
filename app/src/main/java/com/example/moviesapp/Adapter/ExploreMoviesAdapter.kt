@@ -1,11 +1,11 @@
 package com.example.moviesapp.Adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.moviesapp.R
@@ -13,13 +13,13 @@ import com.example.moviesapp.api.Data
 
 class ExploreMoviesAdapter(private var movies: MutableList<Data>
 
-) : RecyclerView.Adapter<ExploreMoviesAdapter.BestMoviesViewHolder>(){
-    class BestMoviesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.Adapter<ExploreMoviesAdapter.ExploreMoviesViewHolder>(){
+    class ExploreMoviesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.item_ly2_pic)
         val textView:TextView=itemView.findViewById(R.id.item_ly2_txt)
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestMoviesViewHolder {
-        return BestMoviesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExploreMoviesViewHolder {
+        return ExploreMoviesViewHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_ly2, parent, false)
         )
@@ -29,15 +29,20 @@ class ExploreMoviesAdapter(private var movies: MutableList<Data>
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: BestMoviesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ExploreMoviesViewHolder, position: Int) {
         val movie = movies[position]
-        Toast.makeText(holder.itemView.context,movie.title,Toast.LENGTH_SHORT).show()
+        if(movie.title.isNullOrEmpty()){
+            Log.d("ExploreMoviesAdapter", "aaaaaaaaaaa")
+        }
+        Log.d("ExploreMoviesAdapter", "bbbbbbbbb")
         holder.textView.text = movie.title
-        Glide.with(holder.itemView.context).load(movie.poster).into(holder.imageView)
+        Glide.with(holder.itemView.context).load(movie.poster).placeholder(R.drawable.wide)
+            .error(R.drawable.wide3).into(holder.imageView)
 
     }
 
     override fun getItemCount(): Int {
+        Log.d("ExploreMoviesAdapter", "getItemCount called, item count: ${movies.size}")
         return movies.size
     }
 }
