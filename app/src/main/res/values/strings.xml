@@ -17,7 +17,8 @@
     <string name="main_txt1">Search Movies...</string>
     <string name="main_txt2">Best Movies</string>
     <string name="main_txt3">Category</string>
-    <string name="main_txt4">Upcoming Movies</string>
+    <string name="main_txt4">Movies</string>
+    <string name="main_txt5">See All</string>
 
     <string name="menu_txt1">Explore</string>
     <string name="menu_txt2">Favorite</string>

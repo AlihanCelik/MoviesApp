@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ class ExploreFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var handler: Handler
     private lateinit var bestMovieAdapter: ExploreMoviesAdapter
+    private lateinit var moviesAdapter: ExploreMoviesAdapter
     private lateinit var genresAdapter: GenresAdapter
 
     private var currentPage = 1
@@ -53,6 +55,8 @@ class ExploreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
         genresAdapter= GenresAdapter(arrayListOf())
+        moviesAdapter= ExploreMoviesAdapter(arrayListOf())
+
         binding.progressBar.visibility = View.VISIBLE
         binding.progressBar1.visibility = View.VISIBLE
         binding.progressBar2.visibility = View.VISIBLE
@@ -100,22 +104,26 @@ class ExploreFragment : Fragment() {
 
         binding.recyclerView1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView1.adapter = bestMovieAdapter
-        getMovies(1, bestMovieAdapter)
+        getMovies(1, bestMovieAdapter,binding.progressBar1)
 
         binding.recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView2.adapter = genresAdapter
         getGenres()
 
+        binding.recyclerView3.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView3.adapter = moviesAdapter
+        getMovies(2, moviesAdapter,binding.progressBar3)
+
 
 
     }
-    private fun getMovies(page: Int, adapter: ExploreMoviesAdapter) {
+    private fun getMovies(page: Int, adapter: ExploreMoviesAdapter,progressBar: ProgressBar) {
         MovieUtils.getMovies(page, { movies ->
             adapter.addMovies(movies)
-            _binding?.progressBar1?.visibility = View.GONE
+            progressBar.visibility = View.GONE
         }, { error ->
             Log.e("ExploreFragment", "Error loading movies", error)
-            _binding?.progressBar1?.visibility = View.GONE
+            progressBar.visibility = View.GONE
         })
     }
     private fun getGenres(){
