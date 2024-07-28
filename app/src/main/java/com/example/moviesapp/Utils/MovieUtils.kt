@@ -1,43 +1,31 @@
 package com.example.moviesapp.Utils
 
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
+
+import com.example.moviesapp.Retrofit.RetrofitClient
 import com.example.moviesapp.api.Data
 import com.example.moviesapp.api.ExampleJson2KtKotlin
-import com.google.gson.Gson
-import okhttp3.*
-import java.io.IOException
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-object MovieUtils {
-    private const val BASE_URL = "https://moviesapi.ir/api/v1/movies"
-    private val client = OkHttpClient()
-
-    fun getMovies(page: Int, onSuccess: (List<Data>) -> Unit, onFailure: (Throwable) -> Unit) {
-        val request = Request.Builder()
-            .url("$BASE_URL?page=$page")
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Handler(Looper.getMainLooper()).post {
-                    onFailure(e)
-                }
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.body?.use { responseBody ->
-                    val responseString = responseBody.string()
-                    Log.d("MovieUtils", "API response: $responseString")
-
-                    val moviesResponse = Gson().fromJson(responseString, ExampleJson2KtKotlin::class.java)
-                    Handler(Looper.getMainLooper()).post {
-                        onSuccess(moviesResponse.data)
+class MovieUtils {
+    companion object {
+        fun getMovies(page: Int, callback: (List<Data>) -> Unit, errorCallback: (Throwable) -> Unit) {
+            RetrofitClient.api.getMovies(page).enqueue(object : Callback<ExampleJson2KtKotlin> {
+                override fun onResponse(call: Call<ExampleJson2KtKotlin>, response: Response<ExampleJson2KtKotlin>) {
+                    if (response.isSuccessful) {
+                        response.body()?.data?.let {
+                            callback(it)
+                        } ?: errorCallback(Throwable("Data is null"))
+                    } else {
+                        errorCallback(Throwable("Response not successful"))
                     }
-                } ?: Handler(Looper.getMainLooper()).post {
-                    onFailure(Exception("Response body is null"))
                 }
-            }
-        })
+
+                override fun onFailure(call: Call<ExampleJson2KtKotlin>, t: Throwable) {
+                    errorCallback(t)
+                }
+            })
+        }
     }
 }

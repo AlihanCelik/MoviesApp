@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:padding="2dp"
     android:layout_height="match_parent">
+
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        app:cardElevation="20dp"
-        app:cardCornerRadius="20dp">
+        android:layout_width="120dp"
+        android:layout_height="155dp"
+        app:cardCornerRadius="20dp"
+        android:layout_gravity="center"
+        app:cardElevation="20dp">
+
         <ImageView
             android:id="@+id/item_ly2_pic"
             android:layout_width="match_parent"
-            android:src="@drawable/wide"
-            android:scaleType="centerCrop"
+            android:layout_height="match_parent"
             android:adjustViewBounds="false"
-            android:layout_height="match_parent">
+            android:scaleType="centerCrop"
+            android:src="@drawable/wide">
 
         </ImageView>
     </com.google.android.material.card.MaterialCardView>
@@ -28,7 +32,7 @@
         android:gravity="center"
         android:textStyle="bold"
         android:layout_marginTop="2dp"
-        android:textSize="15dp">
+        android:textSize="12dp">
 
     </TextView>
 

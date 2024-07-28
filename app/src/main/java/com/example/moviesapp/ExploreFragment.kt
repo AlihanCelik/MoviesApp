@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -30,7 +31,8 @@ class ExploreFragment : Fragment() {
     private var currentPage = 1
     private val totalPages = 25
     private val runnable = Runnable {
-        binding.viewPager.currentItem=binding.viewPager.currentItem+1
+        val nextItem = (binding.viewPager.currentItem + 1) % binding.viewPager.adapter!!.itemCount
+        binding.viewPager.currentItem = nextItem
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +76,11 @@ class ExploreFragment : Fragment() {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable,30000)
+                if (position == sliderAdapter.itemCount - 1) {
+                    handler.postDelayed({
+                        binding.viewPager.currentItem = 0
+                    }, 30000)
+                }
             }
         })
         binding.viewPager.post {
@@ -84,26 +91,20 @@ class ExploreFragment : Fragment() {
             binding.viewPager.currentItem = pictureList.size / 2
         }
 
+        binding.recyclerView1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView1.adapter = bestMovieAdapter
 
-        binding.recyclerView1.adapter=bestMovieAdapter
-        getMovies(1,bestMovieAdapter)
+        getMovies(1, bestMovieAdapter)
 
 
 
     }
     private fun getMovies(page: Int, adapter: ExploreMoviesAdapter) {
         MovieUtils.getMovies(page, { movies ->
-            Log.d("ExploreFragment", "Movies received: ${movies.size}")
-            movies.forEach { movie ->
-                Log.d("ExploreFragment", "Movie: $movie")
-            }
-            Handler(Looper.getMainLooper()).post {
-                adapter.addMovies(movies)
-                Log.d("ExploreFragment", "Movies added to adapter")
-            }
+            adapter.addMovies(movies)
+            Log.d("ExploreFragment", "Movies loaded: ${movies.size}")
         }, { error ->
-            Log.e("ExploreFragment", "Error: ${error.message}")
-            Toast.makeText(requireContext(), "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            Log.e("ExploreFragment", "Error loading movies", error)
         })
     }
 
