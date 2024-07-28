@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.moviesapp.Adapter.ExploreMoviesAdapter
 import com.example.moviesapp.Adapter.SliderAdapter
 import com.example.moviesapp.Entities.PictureEntities
+import com.example.moviesapp.Utils.MovieUtils
 import com.example.moviesapp.databinding.FragmentExploreBinding
 import kotlin.math.abs
 
@@ -21,6 +24,10 @@ class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
     private lateinit var handler: Handler
+    private lateinit var BestMovieAdapter: ExploreMoviesAdapter
+
+    private var currentPage = 1
+    private val totalPages = 25
     private val runnable = Runnable {
         binding.viewPager.currentItem=binding.viewPager.currentItem+1
     }
@@ -73,6 +80,19 @@ class ExploreFragment : Fragment() {
             }
             binding.viewPager.currentItem = pictureList.size / 2
         }
+
+        BestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
+        binding.recyclerView1.adapter=BestMovieAdapter
+        getMovies(1,BestMovieAdapter)
+
+
+    }
+    private fun getMovies(page: Int, adapter: ExploreMoviesAdapter) {
+        MovieUtils.getMovies(page, { movies ->
+            Toast.makeText(requireContext(),movies.size, Toast.LENGTH_SHORT).show()
+            adapter.addMovies(movies)
+        }, { error ->
+        })
     }
 
 
