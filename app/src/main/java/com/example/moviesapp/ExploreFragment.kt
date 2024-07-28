@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviesapp.Adapter.ExploreMoviesAdapter
+import com.example.moviesapp.Adapter.GenresAdapter
 import com.example.moviesapp.Adapter.SliderAdapter
 import com.example.moviesapp.Entities.PictureEntities
 import com.example.moviesapp.Utils.MovieUtils
@@ -27,6 +28,7 @@ class ExploreFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var handler: Handler
     private lateinit var bestMovieAdapter: ExploreMoviesAdapter
+    private lateinit var genresAdapter: GenresAdapter
 
     private var currentPage = 1
     private val totalPages = 25
@@ -50,6 +52,11 @@ class ExploreFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
+        genresAdapter= GenresAdapter(arrayListOf())
+        binding.progressBar.visibility = View.VISIBLE
+        binding.progressBar1.visibility = View.VISIBLE
+        binding.progressBar2.visibility = View.VISIBLE
+        binding.progressBar3.visibility = View.VISIBLE
 
         val pictureList = mutableListOf(
             PictureEntities("https://github.com/worldsat/project155/blob/main/wide3.jpg?raw=true"),
@@ -63,7 +70,7 @@ class ExploreFragment : Fragment() {
         binding.viewPager.adapter = sliderAdapter
         binding.viewPager.clipChildren=false
         binding.viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_ALWAYS
-        binding.progressBar.visibility = View.VISIBLE
+
         val transformer = CompositePageTransformer()
         transformer.addTransformer(MarginPageTransformer(40))
         transformer.addTransformer { page, position ->
@@ -93,8 +100,11 @@ class ExploreFragment : Fragment() {
 
         binding.recyclerView1.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView1.adapter = bestMovieAdapter
-
         getMovies(1, bestMovieAdapter)
+
+        binding.recyclerView2.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView2.adapter = genresAdapter
+        getGenres()
 
 
 
@@ -102,9 +112,20 @@ class ExploreFragment : Fragment() {
     private fun getMovies(page: Int, adapter: ExploreMoviesAdapter) {
         MovieUtils.getMovies(page, { movies ->
             adapter.addMovies(movies)
-            Log.d("ExploreFragment", "Movies loaded: ${movies.size}")
+            _binding?.progressBar1?.visibility = View.GONE
         }, { error ->
             Log.e("ExploreFragment", "Error loading movies", error)
+            _binding?.progressBar1?.visibility = View.GONE
+        })
+    }
+    private fun getGenres(){
+        MovieUtils.getGenres({ genresList ->
+            genresAdapter.addGenres(genresList)
+            _binding?.progressBar2?.visibility = View.GONE
+        }, { error ->
+
+            Log.e("ExploreFragment", "Error: ${error.message}")
+            _binding?.progressBar2?.visibility = View.GONE
         })
     }
 
