@@ -36,6 +36,38 @@
             android:layout_gravity="center"
             android:text="Movies">
         </TextView>
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+        </Space>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            app:cardElevation="20dp"
+            android:id="@+id/ctg"
+            android:layout_gravity="center"
+            app:cardCornerRadius="10dp"
+            app:strokeWidth="0dp"
+            android:layout_marginRight="10dp"
+            app:strokeColor="@color/darkGrey"
+            android:backgroundTint="@color/dark_blue"
+            app:cardBackgroundColor="@color/dark_blue"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/category_txt"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:textColor="@color/grey"
+                android:layout_height="wrap_content"
+                android:text="All">
+
+            </TextView>
+
+
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

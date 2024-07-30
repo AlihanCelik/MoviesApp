@@ -30,6 +30,16 @@ class ExploreMoviesAdapter(private var movies: MutableList<Data>) : RecyclerView
         movies.addAll(newMovies)
         notifyDataSetChanged()
     }
+    fun clearMovies() {
+        movies.clear()
+        notifyDataSetChanged()
+    }
+
+    // Update existing movies with new list
+    fun updateMovies(newMovies: List<Data>) {
+        clearMovies()
+        addMovies(newMovies)
+    }
 
     override fun onBindViewHolder(holder: ExploreMoviesViewHolder, position: Int) {
         val movie = movies[position]

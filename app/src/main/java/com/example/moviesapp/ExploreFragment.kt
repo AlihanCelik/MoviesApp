@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -25,6 +26,7 @@ import com.example.moviesapp.Adapter.GenresAdapter
 import com.example.moviesapp.Adapter.SliderAdapter
 import com.example.moviesapp.Entities.PictureEntities
 import com.example.moviesapp.Utils.MovieUtils
+import com.example.moviesapp.api.Data
 import com.example.moviesapp.databinding.FragmentExploreBinding
 import kotlin.math.abs
 
@@ -34,10 +36,12 @@ class ExploreFragment : Fragment() {
     private lateinit var handler: Handler
     private lateinit var bestMovieAdapter: ExploreMoviesAdapter
     private lateinit var moviesAdapter: ExploreMoviesAdapter
+    private lateinit var searchAdapter: ExploreMoviesAdapter
     private lateinit var genresAdapter: GenresAdapter
 
     private var currentPage = 1
     private val totalPages = 25
+    private var searchQuery = ""
     private val runnable = Runnable {
         val nextItem = (binding.viewPager.currentItem + 1) % binding.viewPager.adapter!!.itemCount
         binding.viewPager.currentItem = nextItem
@@ -119,9 +123,33 @@ class ExploreFragment : Fragment() {
             val intent=Intent(context,AllMovieActivity::class.java)
             startActivity(intent)
         }
+        binding.searchRecyclerView.layoutManager = GridLayoutManager(context,3)
+        binding.searchRecyclerView.adapter = searchAdapter
+
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchQuery = s.toString().trim()
+                if (searchQuery.isNotEmpty()) {
+                    filterMoviesByTitle(searchQuery)
+                } else {
+                    searchAdapter.clearMovies()
+                    binding.searchRecyclerView.visibility = View.GONE
+                }
+            }
+        })
 
 
 
+    }
+    private fun filterMoviesByTitle(query: String, movies: List<Data>? = null) {
+        val filteredMovies = movies?.filter { it.title?.contains(query, ignoreCase = true) == true }
+        filteredMovies?.let {
+            searchAdapter.updateMovies(it)
+            binding.searchRecyclerView.visibility = View.VISIBLE
+        }
     }
 
 

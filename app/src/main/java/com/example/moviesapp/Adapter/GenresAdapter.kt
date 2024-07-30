@@ -1,10 +1,13 @@
 package com.example.moviesapp.Adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviesapp.AllMovieActivity
 import com.example.moviesapp.R
 import com.example.moviesapp.api.Genres
 
@@ -29,6 +32,11 @@ class GenresAdapter(private var genres: MutableList<Genres>
     override fun onBindViewHolder(holder: GenresViewHolder, position: Int) {
 
         holder.textView.text=genres[position].name
+        holder.itemView.findViewById<CardView>(R.id.item_ctg_btn).setOnClickListener {
+            var intent= Intent(holder.itemView.context,AllMovieActivity::class.java)
+            intent.putExtra("category",genres[position].name)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

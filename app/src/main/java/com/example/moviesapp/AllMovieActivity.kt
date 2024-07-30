@@ -17,6 +17,7 @@ class AllMovieActivity : AppCompatActivity() {
     private lateinit var movieAdapter: ExploreMoviesAdapter
     private var currentPage = 1
     private val totalPageCount = 25
+    var category:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -24,6 +25,12 @@ class AllMovieActivity : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this, 3)
         binding.backBtn.setOnClickListener {
             finish()
+        }
+        category=intent.getStringExtra("category")
+        if(category==null || category=="All"){
+            binding.categoryTxt.text = "All"
+        }else{
+            binding.categoryTxt.text = category
         }
 
         binding.recyclerView.apply {
@@ -42,7 +49,13 @@ class AllMovieActivity : AppCompatActivity() {
 
     private fun loadMoreMovies(page: Int) {
         MovieUtils.getMovies(page, { movies ->
-            movieAdapter.addMovies(movies)
+            if(category==null || category=="All"){
+                movieAdapter.addMovies(movies)
+            }else{
+                val adventureMovies = movies.filter { it.genres.contains(category) }
+                movieAdapter.addMovies(adventureMovies)
+            }
+
         }, { error ->
         })
 
