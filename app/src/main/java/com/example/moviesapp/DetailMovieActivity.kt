@@ -23,6 +23,9 @@ class DetailMovieActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
 
         var movie_id=intent.getIntExtra("movie_id",-1)
         if (movie_id != -1) {
@@ -57,8 +60,8 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.detailWriter.text=detailMovie.writer
         Glide.with(this).load(detailMovie.poster).placeholder(R.drawable.wide)
             .error(R.drawable.wide3).into(binding.imageView)
-        val genresList = detailMovie.genres.map { genreName -> Genres(name = genreName) }
-        genresAdapter.addGenres(genresList)
+        val genresList = detailMovie.genres.map { genreName -> Genres(name = genreName) }.toMutableList()
+        genresAdapter= GenresAdapter(genresList)
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.adapter = genresAdapter
     }
