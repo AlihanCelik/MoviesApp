@@ -42,6 +42,7 @@ class ExploreMoviesAdapter(private var movies: MutableList<Data>) : RecyclerView
             .error(R.drawable.wide3).into(holder.imageView)
         holder.itemView.findViewById<LinearLayout>(R.id.item_l).setOnClickListener {
             val intent=Intent(holder.itemView.context,DetailMovieActivity::class.java)
+            intent.putExtra("movie_id",movie.id)
             holder.itemView.context.startActivity(intent)
         }
     }

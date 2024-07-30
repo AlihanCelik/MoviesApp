@@ -136,6 +136,7 @@
                         app:tint="@color/yellow"></ImageView>
 
                     <TextView
+                        android:id="@+id/detail_imdb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -165,6 +166,7 @@
                     </ImageView>
 
                     <TextView
+                        android:id="@+id/detail_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -195,6 +197,7 @@
                     </ImageView>
 
                     <TextView
+                        android:id="@+id/detail_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -243,6 +246,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/detail_summary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="stringdetail_txt1jsjsjjsjsjsjsjsjsjsjsssssskskskkskskskskskkskskskkskskskskskskskkskskj"
@@ -273,6 +277,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/detail_actors"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="stringdetail_txt1jsjsjjsjsjsjsjsjsjsjsssssskskskkskskskskskkskskskkskskskskskskskkskskj"
@@ -319,6 +324,7 @@
                         android:textStyle="bold">
                     </TextView>
                     <TextView
+                        android:id="@+id/detail_dirctor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Frank Darabont"
@@ -344,6 +350,7 @@
                         android:textStyle="bold">
                     </TextView>
                     <TextView
+                        android:id="@+id/detail_writer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Frank Darabont"
@@ -354,31 +361,7 @@
                         android:textStyle="bold">
                     </TextView>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/detail_txt5"
-                        android:textSize="15dp"
-                        android:layout_gravity="center"
-                        android:textColor="@color/orange"
-                        android:textStyle="bold">
-                    </TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Frank Darabont"
-                        android:textSize="12dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:textColor="@color/grey"
-                        android:textStyle="bold">
-                    </TextView>
-                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_gravity="center"
@@ -394,6 +377,7 @@
                         android:textStyle="bold">
                     </TextView>
                     <TextView
+                        android:id="@+id/detail_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Frank Darabont"
@@ -419,6 +403,7 @@
                         android:textStyle="bold">
                     </TextView>
                     <TextView
+                        android:id="@+id/detail_awards"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Frank Darabont"

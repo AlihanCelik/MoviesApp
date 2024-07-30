@@ -5,6 +5,7 @@ import com.example.moviesapp.api.ExampleJson2KtKotlin
 import com.example.moviesapp.api.Genres
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieApiService {
@@ -15,5 +16,5 @@ interface MovieApiService {
     fun getGenres(): Call<List<Genres>>
 
     @GET("movies/{id}")
-    fun getDetailMovie(@Query("id") id: Int): Call<DetailMovie>
+    fun getDetailMovie(@Path("id") id: Int): Call<DetailMovie>
 }
