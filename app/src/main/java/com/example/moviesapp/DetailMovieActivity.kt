@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.moviesapp.Adapter.DetailImgAdapter
 import com.example.moviesapp.Adapter.GenresAdapter
 import com.example.moviesapp.Utils.MovieUtils
 import com.example.moviesapp.api.DetailMovie
@@ -19,6 +20,7 @@ class DetailMovieActivity : AppCompatActivity() {
         ActivityDetailMovieBinding.inflate(layoutInflater)
     }
     private lateinit var genresAdapter: GenresAdapter
+    private lateinit var imgAdapter: DetailImgAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,11 +60,15 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.detailSummary.text=detailMovie.plot
         binding.detailCountry.text=detailMovie.country
         binding.detailWriter.text=detailMovie.writer
-        Glide.with(this).load(detailMovie.poster).placeholder(R.drawable.wide)
-            .error(R.drawable.wide3).into(binding.imageView)
+        Glide.with(this).load(detailMovie.poster).into(binding.imageView)
         val genresList = detailMovie.genres.map { genreName -> Genres(name = genreName) }.toMutableList()
         genresAdapter= GenresAdapter(genresList)
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerView.adapter = genresAdapter
+
+        imgAdapter= DetailImgAdapter(detailMovie.images)
+        binding.recyclerView2.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView2.adapter = imgAdapter
+
     }
 }
