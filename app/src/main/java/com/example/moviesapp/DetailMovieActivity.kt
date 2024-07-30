@@ -21,12 +21,22 @@ class DetailMovieActivity : AppCompatActivity() {
     }
     private lateinit var genresAdapter: GenresAdapter
     private lateinit var imgAdapter: DetailImgAdapter
+    private var fav=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.backBtn.setOnClickListener {
             finish()
+        }
+        binding.favBtn.setOnClickListener {
+            if(!fav){
+                fav=true
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
+            }else{
+                fav=false
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
+            }
         }
 
         var movie_id=intent.getIntExtra("movie_id",-1)
