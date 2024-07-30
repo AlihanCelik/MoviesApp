@@ -25,6 +25,8 @@ class DetailImgAdapter(private var imgList :MutableList<String>
         val picture = imgList[position]
         Glide.with(holder.imageView.context)
             .load(picture)
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
             .into(holder.imageView)
 
     }

@@ -60,7 +60,9 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.detailSummary.text=detailMovie.plot
         binding.detailCountry.text=detailMovie.country
         binding.detailWriter.text=detailMovie.writer
-        Glide.with(this).load(detailMovie.poster).into(binding.imageView)
+        Glide.with(this).load(detailMovie.poster)
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder).into(binding.imageView)
         val genresList = detailMovie.genres.map { genreName -> Genres(name = genreName) }.toMutableList()
         genresAdapter= GenresAdapter(genresList)
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

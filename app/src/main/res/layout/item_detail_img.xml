@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
     android:padding="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.card.MaterialCardView
@@ -10,7 +10,7 @@
         android:clickable="true"
         app:cardBackgroundColor="@color/dark_blue"
         app:strokeColor="@color/darkGrey"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="30dp"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/item_detail_pic"

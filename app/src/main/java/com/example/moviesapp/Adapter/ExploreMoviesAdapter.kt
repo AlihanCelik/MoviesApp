@@ -38,8 +38,9 @@ class ExploreMoviesAdapter(private var movies: MutableList<Data>) : RecyclerView
         }
         Log.d("ExploreMoviesAdapter", "bbbbbbbbb")
         holder.textView.text = movie.title
-        Glide.with(holder.itemView.context).load(movie.poster).placeholder(R.drawable.wide)
-            .error(R.drawable.wide3).into(holder.imageView)
+        Glide.with(holder.itemView.context).load(movie.poster)
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder).into(holder.imageView)
         holder.itemView.findViewById<LinearLayout>(R.id.item_l).setOnClickListener {
             val intent=Intent(holder.itemView.context,DetailMovieActivity::class.java)
             intent.putExtra("movie_id",movie.id)

@@ -28,8 +28,8 @@ class SliderAdapter(private var context: Context,
         val picture = sliderAdapter[position]
         Glide.with(context)
             .load(picture.image)
-            .placeholder(R.drawable.wide)
-            .error(R.drawable.wide3)
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
             .into(holder.imageView)
 
     }
