@@ -29,6 +29,14 @@
 
     <string name="detail_txt1">Summary</string>
     <string name="detail_txt2">Actors</string>
+    <string name="detail_txt3">Director</string>
+    <string name="detail_txt4">Writer</string>
+    <string name="detail_txt5">Plot</string>
+    <string name="detail_txt6">Country</string>
+    <string name="detail_txt7">Awards</string>
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

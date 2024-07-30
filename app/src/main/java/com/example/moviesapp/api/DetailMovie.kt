@@ -1,9 +1,9 @@
-package com.example.example
+package com.example.moviesapp.api
 
 import com.google.gson.annotations.SerializedName
 
 
-data class ExampleJson2KtKotlin (
+data class DetailMovie (
 
   @SerializedName("id"          ) var id         : Int?              = null,
   @SerializedName("title"       ) var title      : String?           = null,

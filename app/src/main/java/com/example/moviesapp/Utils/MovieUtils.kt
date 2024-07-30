@@ -3,6 +3,7 @@ package com.example.moviesapp.Utils
 
 import com.example.moviesapp.Retrofit.RetrofitClient
 import com.example.moviesapp.api.Data
+import com.example.moviesapp.api.DetailMovie
 import com.example.moviesapp.api.ExampleJson2KtKotlin
 import com.example.moviesapp.api.Genres
 import retrofit2.Call
@@ -44,6 +45,23 @@ class MovieUtils {
                 }
 
                 override fun onFailure(call: Call<List<Genres>>, t: Throwable) {
+                    errorCallback(t)
+                }
+            })
+        }
+        fun getDetailMovie(id: Int, callback: (DetailMovie) -> Unit, errorCallback: (Throwable) -> Unit) {
+            RetrofitClient.api.getDetailMovie(id).enqueue(object : Callback<DetailMovie> {
+                override fun onResponse(call: Call<DetailMovie>, response: Response<DetailMovie>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            callback(it)
+                        } ?: errorCallback(Throwable("Data is null"))
+                    } else {
+                        errorCallback(Throwable("Response not successful"))
+                    }
+                }
+
+                override fun onFailure(call: Call<DetailMovie>, t: Throwable) {
                     errorCallback(t)
                 }
             })
