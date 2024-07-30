@@ -143,7 +143,6 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
-                        android:text="9.4"
                         android:textColor="@color/white"
                         android:textStyle="bold"></TextView>
                 </LinearLayout>
@@ -173,7 +172,6 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
-                        android:text="140 min"
                         android:textColor="@color/white"
                         android:textStyle="bold">
 
@@ -204,7 +202,6 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
-                        android:text="19 Dec 2020"
                         android:textColor="@color/white"
                         android:textStyle="bold">
 
@@ -250,7 +247,6 @@
                     android:id="@+id/detail_summary"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="stringdetail_txt1jsjsjjsjsjsjsjsjsjsjsssssskskskkskskskskskkskskskkskskskskskskskkskskj"
                     android:textColor="@color/grey"
                     android:textSize="12dp">
                 </TextView>
@@ -281,7 +277,6 @@
                     android:id="@+id/detail_actors"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="stringdetail_txt1jsjsjjsjsjsjsjsjsjsjsssssskskskkskskskskskkskskskkskskskskskskskkskskj"
                     android:textColor="@color/grey"
                     android:textSize="12dp">
 
@@ -326,7 +321,6 @@
                         android:id="@+id/detail_dirctor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frank Darabont"
                         android:textSize="12dp"
                         android:textColor="@color/grey">
                     </TextView>
@@ -349,7 +343,6 @@
                         android:id="@+id/detail_writer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frank Darabont"
                         android:textSize="12dp"
                         android:textColor="@color/grey">
                     </TextView>
@@ -373,7 +366,6 @@
                         android:id="@+id/detail_country"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frank Darabont"
                         android:textSize="12dp"
                         android:textColor="@color/grey">
                     </TextView>
@@ -396,7 +388,6 @@
                         android:id="@+id/detail_awards"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Frank Darabont"
                         android:textSize="12dp"
                         android:textColor="@color/grey">
                     </TextView>
