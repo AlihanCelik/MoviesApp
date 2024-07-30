@@ -64,6 +64,7 @@ class ExploreFragment : Fragment() {
         bestMovieAdapter= ExploreMoviesAdapter(arrayListOf())
         genresAdapter= GenresAdapter(arrayListOf())
         moviesAdapter= ExploreMoviesAdapter(arrayListOf())
+        searchAdapter= ExploreMoviesAdapter(arrayListOf())
 
         binding.progressBar.visibility = View.VISIBLE
         binding.progressBar1.visibility = View.VISIBLE
@@ -144,13 +145,17 @@ class ExploreFragment : Fragment() {
 
 
     }
-    private fun filterMoviesByTitle(query: String, movies: List<Data>? = null) {
-        val filteredMovies = movies?.filter { it.title?.contains(query, ignoreCase = true) == true }
-        filteredMovies?.let {
-            searchAdapter.updateMovies(it)
+    private fun filterMoviesByTitle(query: String) {
+        MovieUtils.getMovies(1, { movies ->
+            val filteredMovies = movies.filter { it.title?.contains(query, ignoreCase = true) == true }
+            searchAdapter.updateMovies(filteredMovies)
             binding.searchRecyclerView.visibility = View.VISIBLE
-        }
+        }, { error ->
+            Log.e("ExploreFragment", "Error filtering movies", error)
+            binding.searchRecyclerView.visibility = View.GONE
+        })
     }
+
 
 
     private fun getMovies(page: Int, adapter: ExploreMoviesAdapter,progressBar: ProgressBar) {
