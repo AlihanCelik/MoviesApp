@@ -16,6 +16,7 @@ retrofit = "2.9.0"
 viewpager2 = "1.1.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
+firebaseDatabase = "21.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +34,7 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
