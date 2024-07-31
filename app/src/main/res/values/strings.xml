@@ -14,6 +14,10 @@
     <string name="login_txt5">or</string>
     <string name="login_txt6">Register Now</string>
 
+    <string name="register_txt1">Register</string>
+    <string name="register_txt2">Password Confirmation</string>
+    <string name="register_txt3">Email</string>
+
     <string name="main_txt1">Search Movies...</string>
     <string name="main_txt2">Best Movies</string>
     <string name="main_txt3">Category</string>

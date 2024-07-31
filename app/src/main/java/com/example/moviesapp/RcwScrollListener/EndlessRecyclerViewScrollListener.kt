@@ -1,4 +1,4 @@
-package com.example.moviesapp
+package com.example.moviesapp.RcwScrollListener
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
