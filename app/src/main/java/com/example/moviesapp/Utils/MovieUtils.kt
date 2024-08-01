@@ -66,5 +66,12 @@ class MovieUtils {
                 }
             })
         }
+        fun getMovieById(movieId: String, callback: (DetailMovie?) -> Unit) {
+            getDetailMovie(movieId.toInt(), { movie ->
+                callback(movie)
+            }, {
+                callback(null)
+            })
+        }
     }
 }

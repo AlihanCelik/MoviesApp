@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_height="match_parent">
             <ImageView
-                android:id="@+id/item_ly1_pic"
+                android:id="@+id/item_fav_pic"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_marginRight="10dp"
@@ -68,7 +68,7 @@
                             app:tint="@color/yellow"></ImageView>
 
                         <TextView
-                            android:id="@+id/detail_imdb"
+                            android:id="@+id/item_fav_imdb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -100,7 +100,7 @@
                         </ImageView>
 
                         <TextView
-                            android:id="@+id/detail_time"
+                            android:id="@+id/item_fav_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
