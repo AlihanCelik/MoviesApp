@@ -40,10 +40,11 @@ class DetailMovieActivity : AppCompatActivity() {
         firebaseHelper.isFavoriteMovie(movie_id){isFavorite->
             if(isFavorite){
                 fav=true
-                binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
+
             }else{
                 fav=false
-                binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
             }
         }
         binding.favBtn.setOnClickListener {
