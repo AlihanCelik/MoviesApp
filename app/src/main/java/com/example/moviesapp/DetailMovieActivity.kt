@@ -29,16 +29,7 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             finish()
         }
-        binding.favBtn.setOnClickListener {
-            if(!fav){
-                fav=true
-                binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
-            }else{
-                fav=false
-                binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
-            }
-        }
-
+        var firebaseHelper=FirebaseHelper(this)
         var movie_id=intent.getIntExtra("movie_id",-1)
         if (movie_id != -1) {
             getDetailMovie(movie_id)
@@ -46,6 +37,34 @@ class DetailMovieActivity : AppCompatActivity() {
             Toast.makeText(this, "Film bulunamadı...", Toast.LENGTH_SHORT).show()
             finish()
         }
+        firebaseHelper.isFavoriteMovie(movie_id){isFavorite->
+            if(isFavorite){
+                fav=true
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
+            }else{
+                fav=false
+                binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
+            }
+        }
+        binding.favBtn.setOnClickListener {
+            if(!fav){
+                firebaseHelper.AddFavoleriMovies(movie_id){success->
+                    if (success) {
+                        fav=true
+                        binding.favImg.setImageResource(R.drawable.baseline_favorite_24)
+                    }
+                }
+            }else{
+                firebaseHelper.removeFavoriteMovie(movie_id){success->
+                    if (success) {
+                        fav=false
+                        binding.favImg.setImageResource(R.drawable.baseline_favorite_border_24)
+                    }
+                }
+            }
+        }
+
+
     }
     private fun getDetailMovie(movieId: Int) {
         MovieUtils.getDetailMovie(movieId, { detailMovie ->
