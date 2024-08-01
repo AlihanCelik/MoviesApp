@@ -43,8 +43,10 @@ class ExploreFragment : Fragment() {
     private val totalPages = 25
     private var searchQuery = ""
     private val runnable = Runnable {
-        val nextItem = (binding.viewPager.currentItem + 1) % binding.viewPager.adapter!!.itemCount
-        binding.viewPager.currentItem = nextItem
+        binding.viewPager.let { viewPager ->
+            val nextItem = (viewPager.currentItem + 1) % viewPager.adapter!!.itemCount
+            viewPager.currentItem = nextItem
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

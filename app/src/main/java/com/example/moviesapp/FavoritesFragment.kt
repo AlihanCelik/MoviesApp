@@ -97,6 +97,10 @@ class FavoritesFragment : Fragment() {
         }
         favAdapter.updateFav(filteredList)
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 
 
