@@ -3,6 +3,8 @@ package com.example.moviesapp
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviesapp.Adapter.ExploreMoviesAdapter
 import com.example.moviesapp.Adapter.FavoriteAdapter
@@ -33,6 +36,7 @@ class FavoritesFragment : Fragment() {
     private lateinit var favAdapter:FavoriteAdapter
     private val database: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    val favoriteMovies = arrayListOf<DetailMovie>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,15 +55,24 @@ class FavoritesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         favAdapter=FavoriteAdapter(arrayListOf())
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                filterMovies(s.toString())
+            }
+        })
+
         binding.favRecyclerView.adapter=favAdapter
-        binding.favRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        database.child(auth.currentUser!!.uid).child("FavoriteFilms").addValueEventListener(object :ValueEventListener{
+        binding.favRecyclerView.layoutManager = GridLayoutManager(context, 2)
+        database.child("Users").child(auth.currentUser!!.uid).child("FavoriteFilms").addValueEventListener(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val favoriteMovies = arrayListOf<DetailMovie>()
+                favoriteMovies.clear()
                 for(ds in snapshot.children ){
                     val id=ds.getValue(FavMovies::class.java)
                     val movie_id= id?.Film_id
-                    Toast.makeText(context,movie_id.toString(),Toast.LENGTH_SHORT).show()
                     if(movie_id!=null){
                         MovieUtils.getMovieById(movie_id.toString()) { movie ->
                             if (movie != null) {
@@ -77,6 +90,12 @@ class FavoritesFragment : Fragment() {
         })
 
 
+    }
+    private fun filterMovies(query: String) {
+        val filteredList = favoriteMovies.filter {
+            it.title!!.contains(query, ignoreCase = true)
+        }
+        favAdapter.updateFav(filteredList)
     }
 
 

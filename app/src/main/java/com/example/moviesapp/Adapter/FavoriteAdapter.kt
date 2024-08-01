@@ -30,7 +30,7 @@ class FavoriteAdapter(private var movies: MutableList<DetailMovie>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         return FavoriteViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_myfavorite, parent, false)
+                .inflate(R.layout.item_favorite, parent, false)
         )
     }
     fun addFav(newgenres: List<DetailMovie>) {
@@ -55,7 +55,7 @@ class FavoriteAdapter(private var movies: MutableList<DetailMovie>
         Glide.with(holder.itemView.context).load(movies[position].poster)
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder).into(holder.imageView)
-        holder.itemView.findViewById<LinearLayout>(R.id.item_fav_l).setOnClickListener {
+        holder.itemView.findViewById<CardView>(R.id.item_fav_l).setOnClickListener {
             val intent=Intent(holder.itemView.context,DetailMovieActivity::class.java)
             intent.putExtra("movie_id",movies[position].id)
             holder.itemView.context.startActivity(intent)

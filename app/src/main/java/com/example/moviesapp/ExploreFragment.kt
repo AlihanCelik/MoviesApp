@@ -138,6 +138,7 @@ class ExploreFragment : Fragment() {
                 } else {
                     searchAdapter.clearMovies()
                     binding.searchRecyclerView.visibility = View.GONE
+                    binding.linearLayoutAll.visibility=View.VISIBLE
                 }
             }
         })
@@ -150,9 +151,11 @@ class ExploreFragment : Fragment() {
             val filteredMovies = movies.filter { it.title?.contains(query, ignoreCase = true) == true }
             searchAdapter.updateMovies(filteredMovies)
             binding.searchRecyclerView.visibility = View.VISIBLE
+            binding.linearLayoutAll.visibility=View.GONE
         }, { error ->
             Log.e("ExploreFragment", "Error filtering movies", error)
             binding.searchRecyclerView.visibility = View.GONE
+            binding.linearLayoutAll.visibility=View.VISIBLE
         })
     }
 
