@@ -44,6 +44,7 @@ class MovieUtils {
                     }
                 }
 
+
                 override fun onFailure(call: Call<List<Genres>>, t: Throwable) {
                     errorCallback(t)
                 }
